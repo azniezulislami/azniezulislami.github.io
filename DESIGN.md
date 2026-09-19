@@ -202,3 +202,14 @@ Square. Every box has `0` radius; the only rounded value on the page is the `2px
 - **Don't** add a second typeface or a monospace run; the tech list is plain Archivo.
 - **Don't** put a kicker or eyebrow above a heading; the tracked uppercase label is reserved for the `h2` and the nav.
 - **Don't** add icons, badges, status dots or section counters.
+
+## Additions, 2026-09-19 evening
+
+- The name in the rail is set in the accent (`#B4471B`) and returns to ink on hover; this is the
+  one place colour is used at display size.
+- Skills are buttons. Hovering or focusing one highlights the project rows whose tech list
+  contains it (`.row.hit`: title in accent-ink, a 1rem accent marker slides in from the left);
+  the other rows drop to 35% opacity. Clicking pins the filter (`aria-pressed="true"`); clicking
+  again releases it. The middle-dot separators are pseudo-content with empty alt text so they do
+  not enter accessible names.
+- Project rows have no date column (`.rows.plain`); years appear only in Experience.

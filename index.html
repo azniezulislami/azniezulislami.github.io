@@ -49,8 +49,9 @@
 
   /* ---------- rail ---------- */
   .name{font-size:clamp(2.4rem,4.2vw,3.4rem);font-weight:600;letter-spacing:-.025em;line-height:1.02;text-wrap:balance;}
+  .name{color:var(--accent);}
   .name a{text-decoration:none;color:inherit;}
-  .name a:hover{color:inherit;}
+  .name a:hover{color:var(--ink);}
   .role{margin-top:.9rem;font-size:1.25rem;font-weight:500;letter-spacing:-.01em;}
   .pitch{margin-top:.9rem;max-width:34ch;color:var(--ink-2);}
 
@@ -89,21 +90,27 @@
   .stack{margin-top:.75rem;font-size:.875rem;color:var(--ink-2);}
   /* every item carries a leading dot; the container is shifted left and clipped so a dot at a line start is never seen */
   .stack,.skills dd{display:flex;flex-wrap:wrap;row-gap:.15rem;margin-left:-.95rem;clip-path:inset(0 0 0 .95rem);}
-  .stack span,.skills dd span{white-space:nowrap;}
-  .stack span::before,.skills dd span::before{content:"\00B7";display:inline-block;width:.95rem;text-align:center;color:var(--ink-2);opacity:.6;}
+  .stack span,.skills dd button{white-space:nowrap;}
+  .stack span::before,.skills dd button::before{content:"\00B7" / "";display:inline-block;width:.95rem;text-align:center;color:var(--ink-2);opacity:.6;}
 
-  /* coursework list */
-  .also{margin-top:3rem;}
-  .also h3{font-weight:500;color:var(--ink);margin-bottom:.5rem;}
-  .also li{display:grid;grid-template-columns:7rem minmax(0,1fr);gap:.2rem 1.5rem;padding:.7rem 0;border-bottom:1px solid var(--rule);}
-  .also li:last-child{border-bottom:0;}
-  .also .what{color:var(--ink-2);}
-  .also .what strong{font-weight:500;color:var(--ink);}
+  .rows.plain .row{grid-template-columns:minmax(0,1fr);}
+  .hint{font-size:.875rem;color:var(--ink-2);margin:-1rem 0 1.75rem;}
+
+  /* project rows react to the skill under the cursor: a marker slides in and the title takes the accent */
+  .rows.plain .row{position:relative;padding-left:1.5rem;transition:opacity .25s var(--ease);}
+  .rows.plain .row::before{content:"";position:absolute;left:0;top:.55em;width:0;height:1px;background:var(--accent);transition:width .25s var(--ease);}
+  .rows.plain .row:hover::before,.rows.plain .row.hit::before{width:1rem;}
+  .rows.plain .row:hover h3,.rows.plain .row.hit h3{color:var(--accent-ink);}
+  .rows.plain .row.hit .stack span.on{color:var(--accent-ink);}
+  .rows.plain.filtering .row:not(.hit){opacity:.35;}
 
   /* skills */
   .skills{display:grid;grid-template-columns:7rem minmax(0,1fr);gap:.9rem 1.5rem;}
   .skills dt{font-size:.875rem;color:var(--ink-2);padding-top:.1em;}
   .skills dd{margin:0 0 0 -.95rem;}
+  .skills dd button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;text-decoration-color:transparent;text-underline-offset:.2em;text-decoration-thickness:1px;transition:color .2s var(--ease),text-decoration-color .2s var(--ease);}
+  .skills dd button:hover,.skills dd button[aria-pressed="true"]{color:var(--accent-ink);text-decoration-color:var(--accent);}
+  .skills dd button:focus-visible{outline-offset:1px;}
 
   /* contact */
   .contact p{max-width:52ch;color:var(--ink-2);}
@@ -121,7 +128,7 @@
     .rail{position:static;height:auto;padding:2.5rem 0 0;gap:2rem;}
     .nav{display:none;}
     main{padding-top:3.5rem;}
-    .row,.also li,.skills,.contact li{grid-template-columns:minmax(0,1fr);gap:.25rem;}
+    .row,.skills,.contact li{grid-template-columns:minmax(0,1fr);gap:.25rem;}
     .when{padding-top:0;}
     .skills{gap:.25rem 0;}
     .skills dd{margin-bottom:.9rem;}
@@ -165,9 +172,9 @@
   <main id="top">
     <section id="about" class="prose" aria-labelledby="about-h">
       <h2 id="about-h">About</h2>
-      <p>I am a Software Engineering graduate from Universiti Malaysia Sarawak (2022 to 2026). In 2026 I interned as a mobile app developer at Timetablehub Technology, where I built TPlus eCampus, a timetable app for universities, from the Flutter client down to its Laravel API, and wrote the product's user manual site.</p>
-      <p>My final year project was a live shuttle bus tracker for the UNIMAS campus. I built it three times, first in Kotlin, then twice in Flutter, until the Firebase version did what the first one promised. It was commended at the faculty symposium for its interface, its logic and the idea itself.</p>
-      <p>Outside software I am a commissioned Second Lieutenant in the UNIMAS ROTU Air Force reserve, after three years of cadet training. I speak Malay and English, with basic Arabic.</p>
+      <p>I am a Software Engineering graduate from Universiti Malaysia Sarawak. In 2026 I interned as a mobile app developer at Timetablehub Technology, where I built a timetable app that universities give to their students and lecturers, and the user manual that ships with it.</p>
+      <p>My final year project was a live shuttle bus tracking app for the UNIMAS campus, built in Flutter. It was tested by real students, met its targets, and was commended at the faculty symposium for its interface, its logic and the idea itself.</p>
+      <p>Most of my degree was group work. I have planned, built and presented software with teams of three to six, taken the lead on modules and schedules when it was my turn, and written the requirements and reports that hold a team project together. I speak Malay and English.</p>
     </section>
 
     <section id="experience" aria-labelledby="exp-h">
@@ -178,7 +185,7 @@
           <div>
             <h3>Mobile App Developer Intern</h3>
             <div class="org">Timetablehub Technology Sdn. Bhd., Petaling Jaya</div>
-            <p>Built <strong>TPlus eCampus</strong>, a read-only timetable app where students see the classes they attend and the exams they sit, and lecturers see what they teach and invigilate. Flutter front end with Riverpod state, go_router navigation, a Drift (SQLite) offline cache, OTP login, notifications and a dark mode; Laravel 13 API on PHP 8.3 connecting to the institution's E-Campus data, run under Docker Compose. Drafted <strong>THub</strong>, an internal staff app with biometric sign-in, and wrote the TPlus user-manual website by hand in HTML and CSS.</p>
+            <p>Built <strong>TPlus eCampus</strong>, a timetable app a university hands to its students and lecturers. A student sees the classes they attend and the exams they sit; a lecturer sees what they teach and invigilate. It works offline once loaded, takes its data straight from the institution's own E-Campus system so nothing can be edited from a phone, and serves several institutions from one app. I built the Flutter app and the Laravel API behind it, drafted <strong>THub</strong>, a staff-only app for the company's internal use, and wrote the product's user manual website.</p>
             <div class="stack"><span>Flutter</span><span>Dart</span><span>Riverpod</span><span>Drift</span><span>Laravel</span><span>PHP</span><span>MySQL</span><span>Docker</span><span>Postman</span></div>
           </div>
         </article>
@@ -186,8 +193,8 @@
           <span class="when">2022 to 2026</span>
           <div>
             <h3>Bachelor of Software Engineering (Honours)</h3>
-            <div class="org">Faculty of Computer Science and Information Technology, UNIMAS</div>
-            <p>Final year project supervised by Mr Mohamad Johan bin Ahmad Khiri, graded B in FYP1 and FYP2. Preceded by a Matriculation Certificate in Physical Science at Kolej Matrikulasi Selangor, 2021 to 2022.</p>
+            <div class="org">Faculty of Computer Science and Information Technology, Universiti Malaysia Sarawak</div>
+            <p>Four years of building software the way industry does it: requirements engineering and writing specifications, database design, data structures and operating systems in C++, object-oriented Java, web development with PHP and MySQL, mobile development, formal methods, software testing and security, project management and software economics. Nearly every course ran as a team project with a real deliverable, so I learned to split work, keep a schedule, review teammates' code and present to a panel. In my final year I helped run the faculty's FYP symposium as vice event manager of its career forum.</p>
           </div>
         </article>
       </div>
@@ -195,52 +202,85 @@
 
     <section id="projects" aria-labelledby="proj-h">
       <h2 id="proj-h">Projects</h2>
-      <div class="rows">
+      <p class="hint">Hover or tap a skill below to see which projects used it.</p>
+      <div class="rows plain">
         <article class="row">
-          <span class="when">2026</span>
           <div>
             <h3>TPlus eCampus</h3>
-            <p>The internship app as a product. Multi-institution and read-only by design, so every edit stays on the E-Campus website and the app can never corrupt a timetable. Ships with a written design system derived from the company logo, captured API samples so the client can be developed offline, and a docs set covering architecture, data model, security and release. A lecturer walkthrough against the demo backend produced the last round of fixes before handover.</p>
-            <div class="stack"><span>Flutter</span><span>Laravel</span><span>Drift</span><span>Dio</span><span>Docker Compose</span></div>
+            <p>A timetable in the student's or lecturer's pocket. It pulls each person's own classes and exams from their institution's E-Campus system, shows the week and the master timetable, reminds them before a session, and stays readable offline and in dark mode. What makes it unusual is restraint: it is read-only by design, so a timetable can never be corrupted from a phone, and one app serves several institutions with each one's own login.</p>
+            <div class="stack"><span>Flutter</span><span>Dart</span><span>Riverpod</span><span>Drift</span><span>Laravel</span><span>PHP</span><span>MySQL</span><span>Docker</span></div>
           </div>
         </article>
         <article class="row">
-          <span class="when">2025 to 2026</span>
           <div>
             <h3>UNIMAS Shuttle Bus Service Mobile Application</h3>
-            <div class="org">Final year project, sole developer</div>
-            <p>Live bus positions on Google Maps, routes and schedules, seat reservation, passenger counts, QR boarding and an admin panel for buses, destinations and timetables. I owned the whole lifecycle: requirements, Figma design, build, a twenty-respondent evaluation, and the report. Three architectures for one problem: native Android in Kotlin with Jetpack Compose and a foreground location service; a Flutter rewrite; then the version that shipped, Flutter with Firebase for auth, data sync and push, Cloud Functions in Node.js, committed Firestore rules and indexes, and seed scripts so it demonstrates from an empty project. Commended at the 22nd FCSIT Symposium for the interface, the logic and the idea.</p>
-            <div class="stack"><span>Flutter</span><span>Firebase</span><span>Cloud Functions</span><span>Google Maps</span><span>Kotlin</span><span>Jetpack Compose</span><span>Figma</span></div>
+            <p>A campus shuttle app for students, drivers and administrators. Students see where every bus is on the map right now, check routes and schedules, reserve a seat and board with a QR code. Drivers share their live position. Administrators manage buses, destinations and timetables and can see how the service is used. Built alone as my final year project and tested with real students, it met its targets and was commended at the faculty symposium for the interface, the logic and the idea.</p>
+            <div class="stack"><span>Flutter</span><span>Dart</span><span>Firebase</span><span>Google Maps</span><span>Figma</span></div>
           </div>
         </article>
         <article class="row">
-          <span class="when">2026</span>
+          <div>
+            <h3>Nasyrah Website</h3>
+            <p>Rumah Kebajikan Nasyrah is a welfare home and Quran education centre in Pekan Nanas, Johor, that shelters asnaf boys aged seven to fourteen and opens Quran classes to the community. I built its website in Malay: who they are, the home and its facilities, the Islamic studies programme, activities, how to join, how to donate and how to reach them. It is a plain static site that loads fast on any phone and still shows the contact details when JavaScript is off.</p>
+            <div class="stack"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+          </div>
+        </article>
+        <article class="row">
           <div>
             <h3>Nasyrah Poster Generator</h3>
-            <p>A tool for a Malay-language religious content site that makes 1880 by 1576 pixel quote posters from one fixed template, where only the Arabic, the translation and the source line change. Runs as a single HTML file in the browser with a copy-to-clipboard button for WhatsApp, and as a Node script that renders a whole batch through headless Playwright.</p>
+            <p>A tool for the same organisation's social media. Staff paste an Arabic quote, its Malay translation and the source; the tool lays them onto Nasyrah's poster template and hands back a finished image, with one click to copy it straight into WhatsApp. It also runs as a batch script that renders a whole list of quotes at once.</p>
             <div class="stack"><span>HTML</span><span>JavaScript</span><span>Node.js</span><span>Playwright</span></div>
           </div>
         </article>
         <article class="row">
-          <span class="when">2026</span>
           <div>
-            <h3>Nasyrah</h3>
-            <p>The site itself: a static Malay-language content site (introduction, Islamic studies, activities, privacy, contact) written in plain HTML, CSS and JavaScript, served locally through Laragon.</p>
-            <div class="stack"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Laragon</span></div>
+            <h3>Alfresco Corner</h3>
+            <p>A restaurant's web app, taken from requirements to launch by a team of five. Customers browse the menu, register, order, pay and leave feedback; staff manage the menu, products and reports from an admin side. We wrote the requirements specification and business plan first, designed every screen, then built it and put it on shared hosting.</p>
+            <div class="stack"><span>PHP</span><span>MySQL</span><span>HTML</span><span>CSS</span></div>
           </div>
         </article>
-      </div>
-
-      <div class="also">
-        <h3>Coursework, the parts that carry into industry</h3>
-        <ul>
-          <li><span class="when">2024 to 2025</span><span class="what"><strong>Alfresco Corner.</strong> Restaurant web app for Web Application Development: an SRS and business plan first, then customer and admin pages, registration, payment and feedback in PHP and MySQL, deployed to shared hosting.</span></li>
-          <li><span class="when">2024</span><span class="what"><strong>Vehicle insurance database.</strong> Entity analysis and ER model, normalised MySQL schema, then a PHP front end with add, edit and delete pages for every entity.</span></li>
-          <li><span class="when">2026</span><span class="what"><strong>OOP learning and quiz app.</strong> Java Swing desktop app; I built the lesson content and the quiz module (question base class, multiple-choice and true-false subclasses, quiz manager).</span></li>
-          <li><span class="when">2023 to 2024</span><span class="what"><strong>Schedulers and data structures in C++.</strong> FCFS and Round Robin process-scheduling simulators with a time-quantum study; an inventory program and a linked-list project tracker.</span></li>
-          <li><span class="when">2024</span><span class="what"><strong>Two-office network design.</strong> Topology, addressing and device plan for a shared-gateway office network, built in Cisco Packet Tracer.</span></li>
-          <li><span class="when">2025</span><span class="what"><strong>Formal specification in VDM++.</strong> Bank account, cash register and bookstore models with implicit and explicit operations, checked in VDMTools.</span></li>
-        </ul>
+        <article class="row">
+          <div>
+            <h3>Vehicle Insurance Management System</h3>
+            <p>A database system for a vehicle insurer, built by a team of four. Policyholders, vehicles, driving licences, policies, agents and payments were worked out from entity analysis and an ER model into a normalised MySQL schema, with a web front end to add, edit and delete every record.</p>
+            <div class="stack"><span>MySQL</span><span>PHP</span></div>
+          </div>
+        </article>
+        <article class="row">
+          <div>
+            <h3>OOP Learning and Quiz App</h3>
+            <p>A desktop app that teaches object-oriented programming and then tests it: lessons you page through, multiple-choice and true-or-false quizzes, badges for good scores and a score history. Team of four; I built the lesson content and the quiz module.</p>
+            <div class="stack"><span>Java</span><span>Java Swing</span></div>
+          </div>
+        </article>
+        <article class="row">
+          <div>
+            <h3>GradTrack, FYP Submission Tracker</h3>
+            <p>A program for a faculty to track final year projects: each record holds the student, supervisor, topic, milestones and submission status, kept in a linked list with a stack of milestone updates, and searched and sorted from a menu. Team project; alongside it, an inventory program of my own for a small shop.</p>
+            <div class="stack"><span>C++</span></div>
+          </div>
+        </article>
+        <article class="row">
+          <div>
+            <h3>Process Scheduling Simulators</h3>
+            <p>Two programs that simulate how an operating system schedules jobs: one for first-come-first-served, one for round robin that runs the same job list at several time quanta and recommends the best. Team projects, each with a written analysis of the results.</p>
+            <div class="stack"><span>C++</span></div>
+          </div>
+        </article>
+        <article class="row">
+          <div>
+            <h3>Two-Office Network Design</h3>
+            <p>A network for a company across two office floors sharing one internet line: wired and wireless staff, shared printers, an addressing plan and the choice of devices, built and tested in Cisco Packet Tracer by a team of five.</p>
+            <div class="stack"><span>Cisco Packet Tracer</span></div>
+          </div>
+        </article>
+        <article class="row">
+          <div>
+            <h3>Formal Specifications in VDM++</h3>
+            <p>Specifications of a bank account, a cash register and a bookstore written in VDM++ with pre- and post-conditions and checked in VDMTools, each behaviour written both implicitly and explicitly.</p>
+            <div class="stack"><span>VDM++</span><span>VDMTools Lite</span></div>
+          </div>
+        </article>
       </div>
     </section>
 
@@ -248,13 +288,13 @@
       <h2 id="skills-h">Skills</h2>
       <dl class="skills">
         <dt>Languages</dt>
-        <dd><span>Dart</span><span>PHP</span><span>Java</span><span>C++</span><span>JavaScript</span><span>Python</span><span>SQL</span><span>HTML and CSS</span></dd>
+        <dd><button type="button">Dart</button><button type="button">PHP</button><button type="button">Java</button><button type="button">C++</button><button type="button">JavaScript</button><button type="button">Python</button><button type="button">SQL</button><button type="button">HTML and CSS</button></dd>
         <dt>Frameworks</dt>
-        <dd><span>Flutter</span><span>Laravel</span><span>Firebase</span><span>Java Swing</span><span>Jetpack Compose</span><span>Playwright</span></dd>
+        <dd><button type="button">Flutter</button><button type="button">Laravel</button><button type="button">Firebase</button><button type="button">Java Swing</button><button type="button">Playwright</button></dd>
         <dt>Tools</dt>
-        <dd><span>Android Studio</span><span>VS Code</span><span>Git and GitHub</span><span>Docker</span><span>Postman</span><span>MySQL</span><span>XAMPP and Laragon</span><span>Figma</span><span>Cisco Packet Tracer</span><span>VDMTools Lite</span><span>e3tool</span></dd>
+        <dd><button type="button">Android Studio</button><button type="button">VS Code</button><button type="button">Git and GitHub</button><button type="button">Docker</button><button type="button">Postman</button><button type="button">MySQL</button><button type="button">XAMPP and Laragon</button><button type="button">Figma</button><button type="button">Cisco Packet Tracer</button><button type="button">VDMTools Lite</button><button type="button">e3tool</button></dd>
         <dt>Practice</dt>
-        <dd><span>SRS writing and requirements tracking</span><span>ER modelling</span><span>UML</span><span>Formal specification</span><span>Function point and COCOMO estimation</span><span>e3-value modelling</span></dd>
+        <dd><button type="button">SRS writing and requirements tracking</button><button type="button">ER modelling</button><button type="button">UML</button><button type="button">Formal specification</button><button type="button">Function point and COCOMO estimation</button><button type="button">e3-value modelling</button></dd>
       </dl>
     </section>
 
@@ -269,7 +309,7 @@
     </section>
 
     <footer>
-      Muhammad Azniezul Islami bin Abdul Razak. Written by hand in HTML and CSS, set in Archivo. Last updated September 2026.
+      Muhammad Azniezul Islami bin Abdul Razak. Last updated September 2026.
     </footer>
   </main>
 </div>
@@ -296,6 +336,44 @@
   window.addEventListener('scroll', function () {
     if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2) mark(byId[sections[sections.length - 1].id]);
   }, { passive: true });
+
+  /* skills light up the projects that used them; hover previews, click pins */
+  var list = document.querySelector('.rows.plain');
+  var rows = Array.prototype.slice.call(list.querySelectorAll('.row'));
+  var buttons = Array.prototype.slice.call(document.querySelectorAll('.skills dd button'));
+  var pinned = null;
+  function terms(label) { return label.toLowerCase().split(' and ').map(function (t) { return t.trim(); }); }
+  function apply(label) {
+    rows.forEach(function (r) {
+      r.classList.remove('hit');
+      r.querySelectorAll('.stack span').forEach(function (t) { t.classList.remove('on'); });
+    });
+    list.classList.toggle('filtering', !!label);
+    if (!label) return;
+    var want = terms(label);
+    rows.forEach(function (r) {
+      var any = false;
+      r.querySelectorAll('.stack span').forEach(function (t) {
+        var v = t.textContent.toLowerCase();
+        if (want.some(function (w) { return v === w || v.indexOf(w) !== -1; })) { t.classList.add('on'); any = true; }
+      });
+      if (any) r.classList.add('hit');
+    });
+  }
+  buttons.forEach(function (b) {
+    b.setAttribute('aria-pressed', 'false');
+    b.addEventListener('mouseenter', function () { if (!pinned) apply(b.textContent); });
+    b.addEventListener('mouseleave', function () { if (!pinned) apply(null); });
+    b.addEventListener('focus', function () { if (!pinned) apply(b.textContent); });
+    b.addEventListener('blur', function () { if (!pinned) apply(null); });
+    b.addEventListener('click', function () {
+      var same = pinned === b;
+      buttons.forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+      pinned = same ? null : b;
+      if (pinned) pinned.setAttribute('aria-pressed', 'true');
+      apply(pinned ? pinned.textContent : null);
+    });
+  });
 })();
 </script>
 </body>
