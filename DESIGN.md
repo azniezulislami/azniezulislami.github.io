@@ -213,3 +213,7 @@ Square. Every box has `0` radius; the only rounded value on the page is the `2px
   again releases it. The middle-dot separators are pseudo-content with empty alt text so they do
   not enter accessible names.
 - Project rows have no date column (`.rows.plain`); years appear only in Experience.
+- Two-tone ground (owner's choice, 2026-09-19): the rail column sits on a flat moss-grey field
+  (`--rail-field: #DDE3D9`) drawn by `.page::before`, running from the window's left edge to the
+  column gap; the content column keeps `--ground`. Two flat fields, a hard edge, no gradient.
+  Below 900px the field is dropped and the page is one ground again.
