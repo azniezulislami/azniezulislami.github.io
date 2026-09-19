@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Azniezul Islami</title>
+<meta name="description" content="Muhammad Azniezul Islami bin Abdul Razak. Software engineer from UNIMAS who builds mobile and web apps end to end: Flutter, Laravel, Firebase.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ground:#F5F4F0;
+    --ink:#1A1917;
+    --ink-2:#5F5B54;
+    --rule:#DDD9D0;
+    --accent:#B4471B;
+    --accent-ink:#8F3612;
+    --font:"Archivo","Helvetica Neue",Arial,sans-serif;
+    --rail:34%;
+    --pad:clamp(1.25rem,5vw,4rem);
+    --ease:cubic-bezier(.2,.7,.2,1);
+  }
+  :root:not([data-theme="light"]){color-scheme:light;}
+  :root[data-theme="dark"]{color-scheme:light;}
+
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;background:var(--ground);color:var(--ink);
+    font-family:var(--font);font-size:1.0625rem;line-height:1.6;
+    font-variant-numeric:tabular-nums;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--accent);color:var(--ground);}
+  a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:.2em;text-decoration-thickness:1px;transition:text-decoration-color .2s var(--ease),color .2s var(--ease);}
+  a:hover{color:var(--accent-ink);text-decoration-color:var(--accent);}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px;}
+  .skip{position:absolute;left:-9999px;top:0;background:var(--ink);color:var(--ground);padding:.6rem 1rem;z-index:20;}
+  .skip:focus{left:1rem;top:1rem;}
+  .skip:hover{color:var(--ground);}
+  h1,h2,h3,p,ul,ol,dl{margin:0;}
+  ul{padding:0;list-style:none;}
+
+  /* ---------- layout ---------- */
+  .page{max-width:1280px;margin:0 auto;padding:0 var(--pad);display:grid;grid-template-columns:var(--rail) minmax(0,1fr);gap:clamp(2rem,6vw,5rem);}
+  .rail{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(3rem,10vh,6rem) 0 clamp(2rem,6vh,4rem);}
+  main{padding:clamp(3rem,10vh,6rem) 0 4rem;}
+
+  /* ---------- rail ---------- */
+  .name{font-size:clamp(2.4rem,4.2vw,3.4rem);font-weight:600;letter-spacing:-.025em;line-height:1.02;text-wrap:balance;}
+  .name a{text-decoration:none;color:inherit;}
+  .name a:hover{color:inherit;}
+  .role{margin-top:.9rem;font-size:1.25rem;font-weight:500;letter-spacing:-.01em;}
+  .pitch{margin-top:.9rem;max-width:34ch;color:var(--ink-2);}
+
+  .nav{margin-top:3rem;}
+  .nav li+li{margin-top:.55rem;}
+  .nav a{
+    display:inline-flex;align-items:center;gap:.9rem;text-decoration:none;
+    font-size:.8125rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);
+  }
+  .nav a::before{content:"";display:block;width:2rem;height:1px;background:var(--rule);transition:width .2s var(--ease),background-color .2s var(--ease);}
+  .nav a:hover,.nav a[aria-current="true"]{color:var(--ink);}
+  .nav a:hover::before,.nav a[aria-current="true"]::before{width:4rem;background:var(--ink);}
+  .nav a[aria-current="true"]::before{background:var(--accent);}
+
+  .reach{display:flex;flex-wrap:wrap;gap:.35rem 1.4rem;font-size:.875rem;}
+  .reach a{text-decoration:none;}
+  .reach a:hover{text-decoration:underline;text-decoration-color:var(--accent);}
+
+  /* ---------- sections ---------- */
+  section{scroll-margin-top:clamp(3rem,10vh,6rem);}
+  section+section{margin-top:clamp(4rem,10vh,6.5rem);}
+  h2{font-size:.8125rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin-bottom:1.75rem;}
+  .prose p{max-width:62ch;}
+  .prose p+p{margin-top:1.1rem;}
+
+  /* rows: date left, content right */
+  .rows{display:grid;gap:2.25rem;}
+  .row{display:grid;grid-template-columns:7rem minmax(0,1fr);gap:.4rem 1.5rem;}
+  .when{font-size:.875rem;color:var(--ink-2);padding-top:.2em;white-space:nowrap;}
+  .row h3{font-size:1.125rem;font-weight:600;letter-spacing:-.01em;line-height:1.3;}
+  .row h3 a{text-decoration:none;}
+  .row h3 a:hover{text-decoration:underline;text-decoration-color:var(--accent);}
+  .row .org{color:var(--ink-2);}
+  .row p{margin-top:.6rem;max-width:60ch;color:var(--ink-2);}
+  .row p strong{font-weight:500;color:var(--ink);}
+  .stack{margin-top:.75rem;font-size:.875rem;color:var(--ink-2);}
+  /* every item carries a leading dot; the container is shifted left and clipped so a dot at a line start is never seen */
+  .stack,.skills dd{display:flex;flex-wrap:wrap;row-gap:.15rem;margin-left:-.95rem;clip-path:inset(0 0 0 .95rem);}
+  .stack span,.skills dd span{white-space:nowrap;}
+  .stack span::before,.skills dd span::before{content:"\00B7";display:inline-block;width:.95rem;text-align:center;color:var(--ink-2);opacity:.6;}
+
+  /* coursework list */
+  .also{margin-top:3rem;}
+  .also h3{font-weight:500;color:var(--ink);margin-bottom:.5rem;}
+  .also li{display:grid;grid-template-columns:7rem minmax(0,1fr);gap:.2rem 1.5rem;padding:.7rem 0;border-bottom:1px solid var(--rule);}
+  .also li:last-child{border-bottom:0;}
+  .also .what{color:var(--ink-2);}
+  .also .what strong{font-weight:500;color:var(--ink);}
+
+  /* skills */
+  .skills{display:grid;grid-template-columns:7rem minmax(0,1fr);gap:.9rem 1.5rem;}
+  .skills dt{font-size:.875rem;color:var(--ink-2);padding-top:.1em;}
+  .skills dd{margin:0 0 0 -.95rem;}
+
+  /* contact */
+  .contact p{max-width:52ch;color:var(--ink-2);}
+  .contact ul{margin-top:1.5rem;display:grid;gap:.5rem;}
+  .contact li{display:grid;grid-template-columns:7rem minmax(0,1fr);gap:1.5rem;}
+  .contact .lbl{font-size:.875rem;color:var(--ink-2);}
+  .contact a{text-decoration:none;font-weight:500;}
+  .contact a:hover{text-decoration:underline;text-decoration-color:var(--accent);}
+
+  footer{margin-top:clamp(4rem,10vh,6.5rem);padding-top:1.5rem;border-top:1px solid var(--rule);font-size:.875rem;color:var(--ink-2);max-width:60ch;}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:900px){
+    .page{grid-template-columns:minmax(0,1fr);gap:0;}
+    .rail{position:static;height:auto;padding:2.5rem 0 0;gap:2rem;}
+    .nav{display:none;}
+    main{padding-top:3.5rem;}
+    .row,.also li,.skills,.contact li{grid-template-columns:minmax(0,1fr);gap:.25rem;}
+    .when{padding-top:0;}
+    .skills{gap:.25rem 0;}
+    .skills dd{margin-bottom:.9rem;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{transition-duration:.01ms !important;}
+  }
+  @media print{
+    .rail{position:static;height:auto;}
+    .nav{display:none;}
+    a{text-decoration:none;color:inherit;}
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#about">Skip to content</a>
+
+<div class="page">
+  <header class="rail">
+    <div>
+      <h1 class="name"><a href="#top">Azniezul Islami</a></h1>
+      <p class="role">Software engineer</p>
+      <p class="pitch">I build mobile and web apps end to end: the Flutter screens, the API and cache behind them, and the documentation that ships with them.</p>
+      <nav class="nav" aria-label="Sections">
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+    <ul class="reach" aria-label="Links">
+      <li><a href="mailto:arazniezulislami@gmail.com">Email</a></li>
+      <li><a href="https://github.com/azniezulislami" target="_blank" rel="noopener">GitHub</a></li>
+      <li><a href="https://www.linkedin.com/in/azniezulislami" target="_blank" rel="noopener">LinkedIn</a></li>
+    </ul>
+  </header>
+
+  <main id="top">
+    <section id="about" class="prose" aria-labelledby="about-h">
+      <h2 id="about-h">About</h2>
+      <p>I am a Software Engineering graduate from Universiti Malaysia Sarawak (2022 to 2026). In 2026 I interned as a mobile app developer at Timetablehub Technology, where I built TPlus eCampus, a timetable app for universities, from the Flutter client down to its Laravel API, and wrote the product's user manual site.</p>
+      <p>My final year project was a live shuttle bus tracker for the UNIMAS campus. I built it three times, first in Kotlin, then twice in Flutter, until the Firebase version did what the first one promised. It was commended at the faculty symposium for its interface, its logic and the idea itself.</p>
+      <p>Outside software I am a commissioned Second Lieutenant in the UNIMAS ROTU Air Force reserve, after three years of cadet training. I speak Malay and English, with basic Arabic.</p>
+    </section>
+
+    <section id="experience" aria-labelledby="exp-h">
+      <h2 id="exp-h">Experience</h2>
+      <div class="rows">
+        <article class="row">
+          <span class="when">2026</span>
+          <div>
+            <h3>Mobile App Developer Intern</h3>
+            <div class="org">Timetablehub Technology Sdn. Bhd., Petaling Jaya</div>
+            <p>Built <strong>TPlus eCampus</strong>, a read-only timetable app where students see the classes they attend and the exams they sit, and lecturers see what they teach and invigilate. Flutter front end with Riverpod state, go_router navigation, a Drift (SQLite) offline cache, OTP login, notifications and a dark mode; Laravel 13 API on PHP 8.3 connecting to the institution's E-Campus data, run under Docker Compose. Drafted <strong>THub</strong>, an internal staff app with biometric sign-in, and wrote the TPlus user-manual website by hand in HTML and CSS.</p>
+            <div class="stack"><span>Flutter</span><span>Dart</span><span>Riverpod</span><span>Drift</span><span>Laravel</span><span>PHP</span><span>MySQL</span><span>Docker</span><span>Postman</span></div>
+          </div>
+        </article>
+        <article class="row">
+          <span class="when">2022 to 2026</span>
+          <div>
+            <h3>Bachelor of Software Engineering (Honours)</h3>
+            <div class="org">Faculty of Computer Science and Information Technology, UNIMAS</div>
+            <p>Final year project supervised by Mr Mohamad Johan bin Ahmad Khiri, graded B in FYP1 and FYP2. Preceded by a Matriculation Certificate in Physical Science at Kolej Matrikulasi Selangor, 2021 to 2022.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="projects" aria-labelledby="proj-h">
+      <h2 id="proj-h">Projects</h2>
+      <div class="rows">
+        <article class="row">
+          <span class="when">2026</span>
+          <div>
+            <h3>TPlus eCampus</h3>
+            <p>The internship app as a product. Multi-institution and read-only by design, so every edit stays on the E-Campus website and the app can never corrupt a timetable. Ships with a written design system derived from the company logo, captured API samples so the client can be developed offline, and a docs set covering architecture, data model, security and release. A lecturer walkthrough against the demo backend produced the last round of fixes before handover.</p>
+            <div class="stack"><span>Flutter</span><span>Laravel</span><span>Drift</span><span>Dio</span><span>Docker Compose</span></div>
+          </div>
+        </article>
+        <article class="row">
+          <span class="when">2025 to 2026</span>
+          <div>
+            <h3>UNIMAS Shuttle Bus Service Mobile Application</h3>
+            <div class="org">Final year project, sole developer</div>
+            <p>Live bus positions on Google Maps, routes and schedules, seat reservation, passenger counts, QR boarding and an admin panel for buses, destinations and timetables. I owned the whole lifecycle: requirements, Figma design, build, a twenty-respondent evaluation, and the report. Three architectures for one problem: native Android in Kotlin with Jetpack Compose and a foreground location service; a Flutter rewrite; then the version that shipped, Flutter with Firebase for auth, data sync and push, Cloud Functions in Node.js, committed Firestore rules and indexes, and seed scripts so it demonstrates from an empty project. Commended at the 22nd FCSIT Symposium for the interface, the logic and the idea.</p>
+            <div class="stack"><span>Flutter</span><span>Firebase</span><span>Cloud Functions</span><span>Google Maps</span><span>Kotlin</span><span>Jetpack Compose</span><span>Figma</span></div>
+          </div>
+        </article>
+        <article class="row">
+          <span class="when">2026</span>
+          <div>
+            <h3>Nasyrah Poster Generator</h3>
+            <p>A tool for a Malay-language religious content site that makes 1880 by 1576 pixel quote posters from one fixed template, where only the Arabic, the translation and the source line change. Runs as a single HTML file in the browser with a copy-to-clipboard button for WhatsApp, and as a Node script that renders a whole batch through headless Playwright.</p>
+            <div class="stack"><span>HTML</span><span>JavaScript</span><span>Node.js</span><span>Playwright</span></div>
+          </div>
+        </article>
+        <article class="row">
+          <span class="when">2026</span>
+          <div>
+            <h3>Nasyrah</h3>
+            <p>The site itself: a static Malay-language content site (introduction, Islamic studies, activities, privacy, contact) written in plain HTML, CSS and JavaScript, served locally through Laragon.</p>
+            <div class="stack"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Laragon</span></div>
+          </div>
+        </article>
+      </div>
+
+      <div class="also">
+        <h3>Coursework, the parts that carry into industry</h3>
+        <ul>
+          <li><span class="when">2024 to 2025</span><span class="what"><strong>Alfresco Corner.</strong> Restaurant web app for Web Application Development: an SRS and business plan first, then customer and admin pages, registration, payment and feedback in PHP and MySQL, deployed to shared hosting.</span></li>
+          <li><span class="when">2024</span><span class="what"><strong>Vehicle insurance database.</strong> Entity analysis and ER model, normalised MySQL schema, then a PHP front end with add, edit and delete pages for every entity.</span></li>
+          <li><span class="when">2026</span><span class="what"><strong>OOP learning and quiz app.</strong> Java Swing desktop app; I built the lesson content and the quiz module (question base class, multiple-choice and true-false subclasses, quiz manager).</span></li>
+          <li><span class="when">2023 to 2024</span><span class="what"><strong>Schedulers and data structures in C++.</strong> FCFS and Round Robin process-scheduling simulators with a time-quantum study; an inventory program and a linked-list project tracker.</span></li>
+          <li><span class="when">2024</span><span class="what"><strong>Two-office network design.</strong> Topology, addressing and device plan for a shared-gateway office network, built in Cisco Packet Tracer.</span></li>
+          <li><span class="when">2025</span><span class="what"><strong>Formal specification in VDM++.</strong> Bank account, cash register and bookstore models with implicit and explicit operations, checked in VDMTools.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="skills" aria-labelledby="skills-h">
+      <h2 id="skills-h">Skills</h2>
+      <dl class="skills">
+        <dt>Languages</dt>
+        <dd><span>Dart</span><span>PHP</span><span>Java</span><span>C++</span><span>JavaScript</span><span>Python</span><span>SQL</span><span>HTML and CSS</span></dd>
+        <dt>Frameworks</dt>
+        <dd><span>Flutter</span><span>Laravel</span><span>Firebase</span><span>Java Swing</span><span>Jetpack Compose</span><span>Playwright</span></dd>
+        <dt>Tools</dt>
+        <dd><span>Android Studio</span><span>VS Code</span><span>Git and GitHub</span><span>Docker</span><span>Postman</span><span>MySQL</span><span>XAMPP and Laragon</span><span>Figma</span><span>Cisco Packet Tracer</span><span>VDMTools Lite</span><span>e3tool</span></dd>
+        <dt>Practice</dt>
+        <dd><span>SRS writing and requirements tracking</span><span>ER modelling</span><span>UML</span><span>Formal specification</span><span>Function point and COCOMO estimation</span><span>e3-value modelling</span></dd>
+      </dl>
+    </section>
+
+    <section id="contact" class="contact" aria-labelledby="contact-h">
+      <h2 id="contact-h">Contact</h2>
+      <p>I am based in Putrajaya and open to software engineering roles, mobile, web or backend. Email is the fastest way to reach me.</p>
+      <ul>
+        <li><span class="lbl">Email</span><a href="mailto:arazniezulislami@gmail.com">arazniezulislami@gmail.com</a></li>
+        <li><span class="lbl">GitHub</span><a href="https://github.com/azniezulislami" target="_blank" rel="noopener">github.com/azniezulislami</a></li>
+        <li><span class="lbl">LinkedIn</span><a href="https://www.linkedin.com/in/azniezulislami" target="_blank" rel="noopener">linkedin.com/in/azniezulislami</a></li>
+      </ul>
+    </section>
+
+    <footer>
+      Muhammad Azniezul Islami bin Abdul Razak. Written by hand in HTML and CSS, set in Archivo. Last updated September 2026.
+    </footer>
+  </main>
+</div>
+
+<script>
+(function () {
+  var links = Array.prototype.slice.call(document.querySelectorAll('.nav a'));
+  var byId = {};
+  links.forEach(function (a) { byId[a.getAttribute('href').slice(1)] = a; });
+  var sections = Object.keys(byId).map(function (id) { return document.getElementById(id); }).filter(Boolean);
+  if (!('IntersectionObserver' in window) || !sections.length) return;
+  var current = null;
+  function mark(a) {
+    if (current === a) return;
+    if (current) current.removeAttribute('aria-current');
+    current = a;
+    current.setAttribute('aria-current', 'true');
+  }
+  var obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { if (e.isIntersecting) mark(byId[e.target.id]); });
+  }, { rootMargin: '-30% 0px -50% 0px' });
+  sections.forEach(function (s) { obs.observe(s); });
+  // The last section can never reach the observer band, so the page end marks it.
+  window.addEventListener('scroll', function () {
+    if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2) mark(byId[sections[sections.length - 1].id]);
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>
