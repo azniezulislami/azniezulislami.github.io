@@ -217,3 +217,40 @@ Square. Every box has `0` radius; the only rounded value on the page is the `2px
   (`--rail-field: #DDE3D9`) drawn by `.page::before`, running from the window's left edge to the
   column gap; the content column keeps `--ground`. Two flat fields, a hard edge, no gradient.
   Below 900px the field is dropped and the page is one ground again.
+
+## Additions, 2026-09-26: screenshot strips
+
+- Every project with a user interface has a strip of screenshots under its tech list
+  (`.shots`): one row that scrolls sideways with scroll-snap, a thin `rule` scrollbar, no
+  arrows drawn on the images. Phone screens show at `22rem` tall (`.shots.phone`), web and
+  desktop screens at `15rem` (`.shots.wide`); an original smaller than that shows at its own
+  size rather than being blown up. Below `900px` they drop to `20rem` / `11rem` and the strip
+  runs to the screen edge so the next image peeks in.
+- Each image is flat with a `1px rule` border that turns `accent` on hover; no radius, no
+  shadow. Every image has a caption: the screen's name in `ink` 500, then a short note in
+  `ink-2`, both Body small.
+- Under each strip, "Previous" and "Next" in the Label voice plus a screen count; hidden
+  when the strip does not overflow and on phones (swipe instead).
+- Clicking a screenshot opens a full-screen viewer (`<dialog class="viewer">`) that stays on
+  `ground`: project name and position at the top left, Close at the top right, the caption
+  and Previous/Next at the bottom. Arrow keys step, Escape closes, focus returns to the
+  thumbnail. Without JavaScript the link opens the full-size image.
+- Images live in `img/<project>/NN-name.webp` (full size) and `NN-name-t.webp` (thumbnail,
+  2x the display height). Sample data only; personal identifiers in coursework screenshots
+  are blurred before they are published.
+- Projects with no interface (scheduling simulators, network design, VDM++ specifications)
+  have no strip.
+
+## Additions, 2026-09-26: featured projects, coursework, identity
+
+- Projects holds only the three featured projects (TPlus eCampus, UNIMAS Shuttle Bus, Nasyrah
+  website and poster generator). Coursework is its own section and nav item, `#coursework`,
+  set as `.rows.plain.compact`: the same rows with the gaps taken out and a `1px rule`
+  between items, titles at 500 / `1rem`, one short paragraph each.
+- A coursework strip sits behind a `<details class="more">` toggle ("Show screens (n)" /
+  "Hide screens"), styled as a body link in Body small. Printing hides strips and toggles.
+- The skill filter works across both lists.
+- Favicon: a single "A" in Archivo 600, `accent` on the rail's moss field
+  (`favicon.ico`, `favicon-32.png`, `apple-touch-icon.png`). Link preview `og.png`
+  (1200x630) repeats the page: name in accent on the moss field, the three featured
+  projects on paper, separated by hairlines.

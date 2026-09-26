@@ -5,6 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Azniezul Islami</title>
 <meta name="description" content="Muhammad Azniezul Islami bin Abdul Razak. Software engineer from UNIMAS who builds mobile and web apps end to end: Flutter, Laravel, Firebase.">
+<link rel="canonical" href="https://azniezulislami.github.io/">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#F5F4F0">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Azniezul Islami">
+<meta property="og:url" content="https://azniezulislami.github.io/">
+<meta property="og:title" content="Azniezul Islami, software engineer">
+<meta property="og:description" content="Mobile and web apps built end to end: Flutter, Laravel, Firebase. Projects, experience and contact.">
+<meta property="og:image" content="https://azniezulislami.github.io/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Azniezul Islami, software engineer. TPlus eCampus, UNIMAS Shuttle Bus, Nasyrah.">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
@@ -92,6 +107,7 @@
   .row .org{color:var(--ink-2);}
   .row p{margin-top:.6rem;max-width:60ch;color:var(--ink-2);}
   .row p strong{font-weight:500;color:var(--ink);}
+  .row p.proof{max-width:60ch;}
   .stack{margin-top:.75rem;font-size:.875rem;color:var(--ink-2);}
   /* every item carries a leading dot; the container is shifted left and clipped so a dot at a line start is never seen */
   .stack,.skills dd{display:flex;flex-wrap:wrap;row-gap:.15rem;margin-left:-.95rem;clip-path:inset(0 0 0 .95rem);}
@@ -108,6 +124,59 @@
   .rows.plain .row:hover h3,.rows.plain .row.hit h3{color:var(--accent-ink);}
   .rows.plain .row.hit .stack span.on{color:var(--accent-ink);}
   .rows.plain.filtering .row:not(.hit){opacity:.35;}
+
+  /* coursework: the same rows, tighter, split by hairlines */
+  .rows.compact{gap:0;}
+  .rows.compact .row{padding-top:1.1rem;padding-bottom:1.1rem;border-bottom:1px solid var(--rule);}
+  .rows.compact .row:first-child{padding-top:0;}
+  .rows.compact .row:last-child{border-bottom:0;}
+  .rows.compact .row::before{top:calc(1.1rem + .55em);}
+  .rows.compact .row:first-child::before{top:.55em;}
+  .rows.compact h3{font-size:1rem;font-weight:500;}
+  .rows.compact .row p{margin-top:.3rem;}
+  .rows.compact .stack{margin-top:.45rem;}
+  .more{margin-top:.6rem;}
+  .more .shots.wide{--shot-h:12rem;}
+  .more summary{display:inline-block;cursor:pointer;list-style:none;font-size:.875rem;color:var(--ink);text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:.2em;text-decoration-thickness:1px;transition:color .2s var(--ease),text-decoration-color .2s var(--ease);}
+  .more summary::-webkit-details-marker{display:none;}
+  .more summary:hover{color:var(--accent-ink);text-decoration-color:var(--accent);}
+  .more .o,.more[open] .c{display:none;}
+  .more[open] .o{display:inline;}
+  .row p + p{margin-top:.75rem;}
+
+  /* screenshots: one row per project that scrolls sideways; every image keeps its caption */
+  .shots{--shot-h:22rem;margin-top:1.1rem;}
+  .shots.wide{--shot-h:15rem;}
+  .shots:focus-visible{outline-offset:6px;}
+  .shots ul{display:flex;gap:1.25rem;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;padding-bottom:.9rem;scrollbar-width:thin;scrollbar-color:var(--rule) transparent;}
+  .shots ul::-webkit-scrollbar{height:6px;}
+  .shots ul::-webkit-scrollbar-thumb{background:var(--rule);}
+  .shots li{flex:none;scroll-snap-align:start;width:min-content;}
+  .shot{display:block;text-decoration:none;}
+  .shot img{display:block;width:auto;height:min(var(--shot-h),var(--h));border:1px solid var(--rule);background:#fff;transition:border-color .2s var(--ease);}
+  .shot:hover img{border-color:var(--accent);}
+  .shots li p{margin-top:.55rem;font-size:.875rem;line-height:1.45;color:var(--ink-2);max-width:none;min-width:9rem;}
+  .shots li p b{display:block;font-weight:500;color:var(--ink);}
+  .shots-nav{display:flex;align-items:center;gap:1.25rem;margin-top:.35rem;font-size:.8125rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;}
+  .shots-nav button{font:inherit;letter-spacing:inherit;text-transform:inherit;color:var(--ink-2);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;text-decoration-color:transparent;text-underline-offset:.2em;text-decoration-thickness:1px;transition:color .2s var(--ease),text-decoration-color .2s var(--ease);}
+  .shots-nav button:hover{color:var(--ink);text-decoration-color:var(--accent);}
+  .shots-nav button:disabled{opacity:.35;cursor:default;text-decoration-color:transparent;color:var(--ink-2);}
+  .shots-nav span{font-size:.875rem;font-weight:400;letter-spacing:0;text-transform:none;color:var(--ink-2);}
+
+  /* viewer: the paper stays paper; the screenshot sits on it at full size */
+  .viewer{border:0;padding:0;margin:0;width:100vw;height:100dvh;max-width:none;max-height:none;background:var(--ground);color:var(--ink);}
+  .viewer::backdrop{background:var(--ground);}
+  .viewer[open]{display:grid;grid-template-rows:auto minmax(0,1fr) auto;}
+  .viewer-bar{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1rem var(--pad);font-size:.8125rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;}
+  .viewer-bar span{color:var(--ink-2);}
+  .viewer button{font:inherit;letter-spacing:inherit;text-transform:inherit;color:var(--ink);background:none;border:0;padding:.25rem 0;cursor:pointer;text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:.2em;text-decoration-thickness:1px;}
+  .viewer button:hover{color:var(--accent-ink);text-decoration-color:var(--accent);}
+  .viewer figure{margin:0;min-height:0;display:flex;align-items:center;justify-content:center;padding:0 var(--pad);}
+  .viewer figure img{max-width:100%;max-height:100%;width:auto;height:auto;border:1px solid var(--rule);background:#fff;}
+  .viewer-foot{display:flex;justify-content:space-between;align-items:baseline;gap:1.5rem;padding:1rem var(--pad) 1.25rem;}
+  .viewer-foot p{font-size:.875rem;color:var(--ink-2);max-width:60ch;}
+  .viewer-foot p b{font-weight:500;color:var(--ink);margin-right:.4rem;}
+  .viewer-foot div{display:flex;gap:1.25rem;font-size:.8125rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;flex:none;}
 
   /* skills */
   .skills{display:grid;grid-template-columns:7rem minmax(0,1fr);gap:.9rem 1.5rem;}
@@ -138,6 +207,11 @@
     .when{padding-top:0;}
     .skills{gap:.25rem 0;}
     .skills dd{margin-bottom:.9rem;}
+    /* on a phone the strip runs to the screen edge so the next image peeks in */
+    .shots{--shot-h:20rem;margin-right:calc(-1 * var(--pad));}
+    .shots.wide{--shot-h:11rem;}
+    .shots ul{padding-right:var(--pad);}
+    .shots-nav{display:none;}
   }
   @media (prefers-reduced-motion:reduce){
     *{transition-duration:.01ms !important;}
@@ -146,6 +220,7 @@
     .rail{position:static;height:auto;}
     .nav{display:none;}
     a{text-decoration:none;color:inherit;}
+    .shots,.shots-nav,.more{display:none;}
   }
 </style>
 </head>
@@ -163,6 +238,7 @@
           <li><a href="#about">About</a></li>
           <li><a href="#experience">Experience</a></li>
           <li><a href="#projects">Projects</a></li>
+          <li><a href="#coursework">Coursework</a></li>
           <li><a href="#skills">Skills</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
@@ -214,76 +290,176 @@
           <div>
             <h3>TPlus eCampus</h3>
             <p>A timetable in the student's or lecturer's pocket. It pulls each person's own classes and exams from their institution's E-Campus system, shows the week and the master timetable, reminds them before a session, and stays readable offline and in dark mode. What makes it unusual is restraint: it is read-only by design, so a timetable can never be corrupted from a phone, and one app serves several institutions with each one's own login.</p>
+            <p class="proof">Every API endpoint answers in a median of <strong>under 35 ms</strong>, load testing finished with <strong>0% failed requests</strong>, and the rate limit held to its budget exactly under a burst. The API contract passes the <strong>OWASP API Security Top 10</strong> checks with zero findings. Testing on a real Android phone caught three reminder and widget defects the emulator had missed; all three were fixed.</p>
             <div class="stack"><span>Flutter</span><span>Dart</span><span>Riverpod</span><span>Drift</span><span>Laravel</span><span>PHP</span><span>MySQL</span><span>Docker</span></div>
+            <div class="shots phone" role="region" aria-label="TPlus eCampus screenshots" tabindex="0">
+              <ul>
+                <li><a class="shot" href="img/tplus/01-login-screen.webp"><img src="img/tplus/01-login-screen-t.webp" width="162" height="352" style="--h:352px" alt="TPlus eCampus: Login screen, pick the institution, enter a student or staff ID" loading="lazy" decoding="async"></a><p><b>Login screen</b> Pick the institution, enter a student or staff ID</p></li>
+                <li><a class="shot" href="img/tplus/02-one-time-code.webp"><img src="img/tplus/02-one-time-code-t.webp" width="162" height="352" style="--h:352px" alt="TPlus eCampus: One-time code, sent to the email or phone the institution holds" loading="lazy" decoding="async"></a><p><b>One-time code</b> Sent to the email or phone the institution holds</p></li>
+                <li><a class="shot" href="img/tplus/03-home-screen.webp"><img src="img/tplus/03-home-screen-t.webp" width="162" height="352" style="--h:352px" alt="TPlus eCampus: Home screen, announcements and the next class" loading="lazy" decoding="async"></a><p><b>Home screen</b> Announcements and the next class</p></li>
+                <li><a class="shot" href="img/tplus/04-class-timetable.webp"><img src="img/tplus/04-class-timetable-t.webp" width="162" height="352" style="--h:352px" alt="TPlus eCampus: Class timetable, the week, one day at a time" loading="lazy" decoding="async"></a><p><b>Class timetable</b> The week, one day at a time</p></li>
+                <li><a class="shot" href="img/tplus/05-exam-schedule.webp"><img src="img/tplus/05-exam-schedule-t.webp" width="162" height="352" style="--h:352px" alt="TPlus eCampus: Exam schedule, countdown to the next paper; a barred exam is flagged" loading="lazy" decoding="async"></a><p><b>Exam schedule</b> Countdown to the next paper; a barred exam is flagged</p></li>
+                <li><a class="shot" href="img/tplus/06-exam-details.webp"><img src="img/tplus/06-exam-details-t.webp" width="162" height="352" style="--h:352px" alt="TPlus eCampus: Exam details, date, venue and invigilators" loading="lazy" decoding="async"></a><p><b>Exam details</b> Date, venue and invigilators</p></li>
+                <li><a class="shot" href="img/tplus/07-notifications.webp"><img src="img/tplus/07-notifications-t.webp" width="162" height="352" style="--h:352px" alt="TPlus eCampus: Notifications, room changes, moved classes, new exams" loading="lazy" decoding="async"></a><p><b>Notifications</b> Room changes, moved classes, new exams</p></li>
+                <li><a class="shot" href="img/tplus/08-dark-mode.webp"><img src="img/tplus/08-dark-mode-t.webp" width="162" height="352" style="--h:352px" alt="TPlus eCampus: Dark mode, exam schedule in the dark theme" loading="lazy" decoding="async"></a><p><b>Dark mode</b> Exam schedule in the dark theme</p></li>
+                <li><a class="shot" href="img/tplus/09-home-screen-widgets.webp"><img src="img/tplus/09-home-screen-widgets-t.webp" width="162" height="352" style="--h:352px" alt="TPlus eCampus: Home-screen widgets, today&#x27;s classes without opening the app" loading="lazy" decoding="async"></a><p><b>Home-screen widgets</b> Today&#x27;s classes without opening the app</p></li>
+                <li><a class="shot" href="img/tplus/10-tablet-layout.webp"><img src="img/tplus/10-tablet-layout-t.webp" width="475" height="352" style="--h:352px" alt="TPlus eCampus: Tablet layout, list and details side by side" loading="lazy" decoding="async"></a><p><b>Tablet layout</b> List and details side by side</p></li>
+              </ul>
+            </div>
           </div>
         </article>
         <article class="row">
           <div>
             <h3>UNIMAS Shuttle Bus Service Mobile Application</h3>
             <p>A campus shuttle app for students, drivers and administrators. Students see where every bus is on the map right now, check routes and schedules, reserve a seat and board with a QR code. Drivers share their live position. Administrators manage buses, destinations and timetables and can see how the service is used. Built alone as my final year project and tested with real students, it met its targets and was commended at the faculty symposium for the interface, the logic and the idea.</p>
+            <p class="proof">The requirements survey found <strong>75%</strong> of students had missed a bus because they could not tell when it would arrive, and <strong>100%</strong> wanted the schedule and seat availability on their phone. In acceptance testing after a live demonstration, <strong>100%</strong> rated the tracking, QR boarding and travel planning Good or Very Good, and every functional test case passed.</p>
             <div class="stack"><span>Flutter</span><span>Dart</span><span>Firebase</span><span>Google Maps</span><span>Figma</span></div>
+            <div class="shots phone" role="region" aria-label="UNIMAS Shuttle Bus Service Mobile Application screenshots" tabindex="0">
+              <ul>
+                <li><a class="shot" href="img/shuttle/01-login-screen.webp"><img src="img/shuttle/01-login-screen-t.webp" width="162" height="352" style="--h:352px" alt="UNIMAS Shuttle Bus Service Mobile Application: Login screen, one sign-in for students, drivers and admins" loading="lazy" decoding="async"></a><p><b>Login screen</b> One sign-in for students, drivers and admins</p></li>
+                <li><a class="shot" href="img/shuttle/02-live-map.webp"><img src="img/shuttle/02-live-map-t.webp" width="162" height="352" style="--h:352px" alt="UNIMAS Shuttle Bus Service Mobile Application: Live map, where the bus is and its next stop" loading="lazy" decoding="async"></a><p><b>Live map</b> Where the bus is and its next stop</p></li>
+                <li><a class="shot" href="img/shuttle/03-hold-a-seat.webp"><img src="img/shuttle/03-hold-a-seat-t.webp" width="162" height="352" style="--h:352px" alt="UNIMAS Shuttle Bus Service Mobile Application: Hold a seat, pick where you get on and off" loading="lazy" decoding="async"></a><p><b>Hold a seat</b> Pick where you get on and off</p></li>
+                <li><a class="shot" href="img/shuttle/04-qr-scanner.webp"><img src="img/shuttle/04-qr-scanner-t.webp" width="162" height="352" style="--h:352px" alt="UNIMAS Shuttle Bus Service Mobile Application: QR scanner, scan the code on the bus to board" loading="lazy" decoding="async"></a><p><b>QR scanner</b> Scan the code on the bus to board</p></li>
+                <li><a class="shot" href="img/shuttle/05-on-board.webp"><img src="img/shuttle/05-on-board-t.webp" width="162" height="352" style="--h:352px" alt="UNIMAS Shuttle Bus Service Mobile Application: On board, scan again when you get off" loading="lazy" decoding="async"></a><p><b>On board</b> Scan again when you get off</p></li>
+                <li><a class="shot" href="img/shuttle/06-schedule.webp"><img src="img/shuttle/06-schedule-t.webp" width="162" height="352" style="--h:352px" alt="UNIMAS Shuttle Bus Service Mobile Application: Schedule, next departure and the day&#x27;s runs" loading="lazy" decoding="async"></a><p><b>Schedule</b> Next departure and the day&#x27;s runs</p></li>
+                <li><a class="shot" href="img/shuttle/07-trip-history.webp"><img src="img/shuttle/07-trip-history-t.webp" width="162" height="352" style="--h:352px" alt="UNIMAS Shuttle Bus Service Mobile Application: Trip history, every ride, searchable" loading="lazy" decoding="async"></a><p><b>Trip history</b> Every ride, searchable</p></li>
+                <li><a class="shot" href="img/shuttle/08-driver-screen.webp"><img src="img/shuttle/08-driver-screen-t.webp" width="162" height="352" style="--h:352px" alt="UNIMAS Shuttle Bus Service Mobile Application: Driver screen, on shift and sharing the bus location" loading="lazy" decoding="async"></a><p><b>Driver screen</b> On shift and sharing the bus location</p></li>
+                <li><a class="shot" href="img/shuttle/09-admin-live-view.webp"><img src="img/shuttle/09-admin-live-view-t.webp" width="162" height="352" style="--h:352px" alt="UNIMAS Shuttle Bus Service Mobile Application: Admin live view, seats taken and the route in progress" loading="lazy" decoding="async"></a><p><b>Admin live view</b> Seats taken and the route in progress</p></li>
+                <li><a class="shot" href="img/shuttle/10-admin-insights.webp"><img src="img/shuttle/10-admin-insights-t.webp" width="162" height="352" style="--h:352px" alt="UNIMAS Shuttle Bus Service Mobile Application: Admin insights, when people travel and rides per day" loading="lazy" decoding="async"></a><p><b>Admin insights</b> When people travel and rides per day</p></li>
+                <li><a class="shot" href="img/shuttle/11-dark-mode.webp"><img src="img/shuttle/11-dark-mode-t.webp" width="162" height="352" style="--h:352px" alt="UNIMAS Shuttle Bus Service Mobile Application: Dark mode, admin live view in the dark theme" loading="lazy" decoding="async"></a><p><b>Dark mode</b> Admin live view in the dark theme</p></li>
+              </ul>
+            </div>
           </div>
         </article>
         <article class="row">
           <div>
-            <h3>Nasyrah Website</h3>
+            <h3>Nasyrah Website and Poster Generator</h3>
             <p>Rumah Kebajikan Nasyrah is a welfare home and Quran education centre in Pekan Nanas, Johor, that shelters asnaf boys aged seven to fourteen and opens Quran classes to the community. I built its website in Malay: who they are, the home and its facilities, the Islamic studies programme, activities, how to join, how to donate and how to reach them. It is a plain static site that loads fast on any phone and still shows the contact details when JavaScript is off.</p>
-            <div class="stack"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+            <p>For its social media I built a poster generator. Staff paste an Arabic quote, its Malay translation and the source, and get back a finished poster on Nasyrah's template, with one click to copy it straight into WhatsApp; a batch mode renders a whole list of quotes at once.</p>
+            <p class="proof">Photos are <strong>72% lighter</strong> than the originals, with location data stripped from every image of the home. Every page passes HTML validation with zero console errors, and the menu and photo viewer work fully from the keyboard. The poster layout lands within <strong>0.5%</strong> of the hand-made originals, and the tool refuses a quote it cannot trim cleanly rather than guess where to cut.</p>
+            <div class="stack"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Node.js</span><span>Playwright</span></div>
+            <div class="shots wide" role="region" aria-label="Nasyrah Website and Poster Generator screenshots" tabindex="0">
+              <ul>
+                <li><a class="shot" href="img/nasyrah/01-home-page.webp"><img src="img/nasyrah/01-home-page-t.webp" width="384" height="240" style="--h:240px" alt="Nasyrah Website and Poster Generator: Home page, who the home is and who it helps" loading="lazy" decoding="async"></a><p><b>Home page</b> Who the home is and who it helps</p></li>
+                <li><a class="shot" href="img/nasyrah/02-home-page-on-a-phone.webp"><img src="img/nasyrah/02-home-page-on-a-phone-t.webp" width="111" height="240" style="--h:240px" alt="Nasyrah Website and Poster Generator: Home page on a phone" loading="lazy" decoding="async"></a><p><b>Home page on a phone</b></p></li>
+                <li><a class="shot" href="img/nasyrah/03-about-page.webp"><img src="img/nasyrah/03-about-page-t.webp" width="384" height="240" style="--h:240px" alt="Nasyrah Website and Poster Generator: About page, the centre&#x27;s story" loading="lazy" decoding="async"></a><p><b>About page</b> The centre&#x27;s story</p></li>
+                <li><a class="shot" href="img/nasyrah/04-islamic-studies-page.webp"><img src="img/nasyrah/04-islamic-studies-page-t.webp" width="384" height="240" style="--h:240px" alt="Nasyrah Website and Poster Generator: Islamic studies page, daily and weekend Quran programmes" loading="lazy" decoding="async"></a><p><b>Islamic studies page</b> Daily and weekend Quran programmes</p></li>
+                <li><a class="shot" href="img/nasyrah/05-activities-page.webp"><img src="img/nasyrah/05-activities-page-t.webp" width="384" height="240" style="--h:240px" alt="Nasyrah Website and Poster Generator: Activities page, camps and events with photos" loading="lazy" decoding="async"></a><p><b>Activities page</b> Camps and events with photos</p></li>
+                <li><a class="shot" href="img/nasyrah/06-donate-page.webp"><img src="img/nasyrah/06-donate-page-t.webp" width="384" height="240" style="--h:240px" alt="Nasyrah Website and Poster Generator: Donate page, bank transfer and DuitNow QR" loading="lazy" decoding="async"></a><p><b>Donate page</b> Bank transfer and DuitNow QR</p></li>
+                <li><a class="shot" href="img/nasyrah/07-contact-page-on-a-phone.webp"><img src="img/nasyrah/07-contact-page-on-a-phone-t.webp" width="111" height="240" style="--h:240px" alt="Nasyrah Website and Poster Generator: Contact page on a phone, address, WhatsApp and an enquiry form" loading="lazy" decoding="async"></a><p><b>Contact page on a phone</b> Address, WhatsApp and an enquiry form</p></li>
+                <li><a class="shot" href="img/nasyrah/08-poster-generator.webp"><img src="img/nasyrah/08-poster-generator-t.webp" width="422" height="240" style="--h:240px" alt="Nasyrah Website and Poster Generator: Poster generator, type the three fields; the preview updates as you type" loading="lazy" decoding="async"></a><p><b>Poster generator</b> Type the three fields; the preview updates as you type</p></li>
+                <li><a class="shot" href="img/nasyrah/09-finished-poster.webp"><img src="img/nasyrah/09-finished-poster-t.webp" width="292" height="240" style="--h:240px" alt="Nasyrah Website and Poster Generator: Finished poster, the PNG staff post to social media" loading="lazy" decoding="async"></a><p><b>Finished poster</b> The PNG staff post to social media</p></li>
+                <li><a class="shot" href="img/nasyrah/10-poster-batch-mode.webp"><img src="img/nasyrah/10-poster-batch-mode-t.webp" width="425" height="240" style="--h:240px" alt="Nasyrah Website and Poster Generator: Poster batch mode, paste a list and render every poster at once" loading="lazy" decoding="async"></a><p><b>Poster batch mode</b> Paste a list and render every poster at once</p></li>
+                <li><a class="shot" href="img/nasyrah/11-poster-generator-on-a-phone.webp"><img src="img/nasyrah/11-poster-generator-on-a-phone-t.webp" width="111" height="240" style="--h:240px" alt="Nasyrah Website and Poster Generator: Poster generator on a phone" loading="lazy" decoding="async"></a><p><b>Poster generator on a phone</b></p></li>
+              </ul>
+            </div>
           </div>
         </article>
-        <article class="row">
-          <div>
-            <h3>Nasyrah Poster Generator</h3>
-            <p>A tool for the same organisation's social media. Staff paste an Arabic quote, its Malay translation and the source; the tool lays them onto Nasyrah's poster template and hands back a finished image, with one click to copy it straight into WhatsApp. It also runs as a batch script that renders a whole list of quotes at once.</p>
-            <div class="stack"><span>HTML</span><span>JavaScript</span><span>Node.js</span><span>Playwright</span></div>
-          </div>
-        </article>
+      </div>
+    </section>
+
+    <section id="coursework" aria-labelledby="course-h">
+      <h2 id="course-h">Coursework</h2>
+      <div class="rows plain compact">
         <article class="row">
           <div>
             <h3>Alfresco Corner</h3>
-            <p>A restaurant's web app, taken from requirements to launch by a team of five. Customers browse the menu, register, order, pay and leave feedback; staff manage the menu, products and reports from an admin side. We wrote the requirements specification and business plan first, designed every screen, then built it and put it on shared hosting.</p>
+            <p>A restaurant ordering web app taken from requirements to launch by a team of five: menu, cart, payment and feedback for customers, and an admin side for the menu, products and reports. Specification and business plan first, then design, build and shared hosting.</p>
             <div class="stack"><span>PHP</span><span>MySQL</span><span>HTML</span><span>CSS</span></div>
+            <details class="more">
+            <summary><span class="c">Show screens (9)</span><span class="o">Hide screens</span></summary>
+            <div class="shots wide" role="region" aria-label="Alfresco Corner screenshots" tabindex="0">
+              <ul>
+                <li><a class="shot" href="img/alfresco/01-menu-page.webp"><img src="img/alfresco/01-menu-page-t.webp" width="384" height="240" style="--h:240px" alt="Alfresco Corner: Menu page, dishes with prices and Add to Cart" loading="lazy" decoding="async"></a><p><b>Menu page</b> Dishes with prices and Add to Cart</p></li>
+                <li><a class="shot" href="img/alfresco/02-login-and-sign-up-page.webp"><img src="img/alfresco/02-login-and-sign-up-page-t.webp" width="384" height="240" style="--h:240px" alt="Alfresco Corner: Login and sign-up page" loading="lazy" decoding="async"></a><p><b>Login and sign-up page</b></p></li>
+                <li><a class="shot" href="img/alfresco/03-member-registration.webp"><img src="img/alfresco/03-member-registration-t.webp" width="384" height="240" style="--h:240px" alt="Alfresco Corner: Member registration" loading="lazy" decoding="async"></a><p><b>Member registration</b></p></li>
+                <li><a class="shot" href="img/alfresco/04-admin-dashboard.webp"><img src="img/alfresco/04-admin-dashboard-t.webp" width="384" height="240" style="--h:240px" alt="Alfresco Corner: Admin dashboard, sales, products and registered accounts" loading="lazy" decoding="async"></a><p><b>Admin dashboard</b> Sales, products and registered accounts</p></li>
+                <li><a class="shot" href="img/alfresco/05-feedback-form.webp"><img src="img/alfresco/05-feedback-form-t.webp" width="449" height="240" style="--h:240px" alt="Alfresco Corner: Feedback form" loading="lazy" decoding="async"></a><p><b>Feedback form</b></p></li>
+                <li><a class="shot" href="img/alfresco/06-menu-selection.webp"><img src="img/alfresco/06-menu-selection-t.webp" width="111" height="240" style="--h:240px" alt="Alfresco Corner: Menu selection, design mockup" loading="lazy" decoding="async"></a><p><b>Menu selection</b> Design mockup</p></li>
+                <li><a class="shot" href="img/alfresco/07-cart.webp"><img src="img/alfresco/07-cart-t.webp" width="111" height="240" style="--h:240px" alt="Alfresco Corner: Cart, design mockup" loading="lazy" decoding="async"></a><p><b>Cart</b> Design mockup</p></li>
+                <li><a class="shot" href="img/alfresco/08-payment-method.webp"><img src="img/alfresco/08-payment-method-t.webp" width="111" height="240" style="--h:240px" alt="Alfresco Corner: Payment method, design mockup" loading="lazy" decoding="async"></a><p><b>Payment method</b> Design mockup</p></li>
+                <li><a class="shot" href="img/alfresco/09-order-status.webp"><img src="img/alfresco/09-order-status-t.webp" width="111" height="240" style="--h:240px" alt="Alfresco Corner: Order status, design mockup" loading="lazy" decoding="async"></a><p><b>Order status</b> Design mockup</p></li>
+              </ul>
+            </div>
+            </details>
           </div>
         </article>
         <article class="row">
           <div>
             <h3>Vehicle Insurance Management System</h3>
-            <p>A database system for a vehicle insurer, built by a team of four. Policyholders, vehicles, driving licences, policies, agents and payments were worked out from entity analysis and an ER model into a normalised MySQL schema, with a web front end to add, edit and delete every record.</p>
+            <p>A database system for a vehicle insurer, built by a team of four: policyholders, vehicles, licences, policies, agents and payments taken from an ER model into a normalised MySQL schema, with a web front end to add, edit and delete every record.</p>
             <div class="stack"><span>MySQL</span><span>PHP</span></div>
+            <details class="more">
+            <summary><span class="c">Show screens (6)</span><span class="o">Hide screens</span></summary>
+            <div class="shots wide" role="region" aria-label="Vehicle Insurance Management System screenshots" tabindex="0">
+              <ul>
+                <li><a class="shot" href="img/insurance/01-main-page.webp"><img src="img/insurance/01-main-page-t.webp" width="549" height="240" style="--h:240px" alt="Vehicle Insurance Management System: Main page" loading="lazy" decoding="async"></a><p><b>Main page</b></p></li>
+                <li><a class="shot" href="img/insurance/02-policyholder-records.webp"><img src="img/insurance/02-policyholder-records-t.webp" width="402" height="240" style="--h:240px" alt="Vehicle Insurance Management System: Policyholder records, iC and phone numbers blurred here" loading="lazy" decoding="async"></a><p><b>Policyholder records</b> IC and phone numbers blurred here</p></li>
+                <li><a class="shot" href="img/insurance/03-add-a-policyholder.webp"><img src="img/insurance/03-add-a-policyholder-t.webp" width="320" height="240" style="--h:240px" alt="Vehicle Insurance Management System: Add a policyholder" loading="lazy" decoding="async"></a><p><b>Add a policyholder</b></p></li>
+                <li><a class="shot" href="img/insurance/04-vehicle-records.webp"><img src="img/insurance/04-vehicle-records-t.webp" width="460" height="240" style="--h:240px" alt="Vehicle Insurance Management System: Vehicle records, iC numbers blurred here" loading="lazy" decoding="async"></a><p><b>Vehicle records</b> IC numbers blurred here</p></li>
+                <li><a class="shot" href="img/insurance/05-policy-types.webp"><img src="img/insurance/05-policy-types-t.webp" width="331" height="240" style="--h:240px" alt="Vehicle Insurance Management System: Policy types" loading="lazy" decoding="async"></a><p><b>Policy types</b></p></li>
+                <li><a class="shot" href="img/insurance/06-insurance-agents.webp"><img src="img/insurance/06-insurance-agents-t.webp" width="383" height="240" style="--h:240px" alt="Vehicle Insurance Management System: Insurance agents" loading="lazy" decoding="async"></a><p><b>Insurance agents</b></p></li>
+              </ul>
+            </div>
+            </details>
           </div>
         </article>
         <article class="row">
           <div>
             <h3>OOP Learning and Quiz App</h3>
-            <p>A desktop app that teaches object-oriented programming and then tests it: lessons you page through, multiple-choice and true-or-false quizzes, badges for good scores and a score history. Team of four; I built the lesson content and the quiz module.</p>
+            <p>A Java desktop app that teaches object-oriented programming and then tests it, with timed quizzes, badges and a score history. Team of four; I built the lesson content and the quiz module.</p>
             <div class="stack"><span>Java</span><span>Java Swing</span></div>
+            <details class="more">
+            <summary><span class="c">Show screens (5)</span><span class="o">Hide screens</span></summary>
+            <div class="shots wide" role="region" aria-label="OOP Learning and Quiz App screenshots" tabindex="0">
+              <ul>
+                <li><a class="shot" href="img/quiz/01-login-prompt.webp"><img src="img/quiz/01-login-prompt-t.webp" width="331" height="153" style="--h:153px" alt="OOP Learning and Quiz App: Login prompt, enter a username to start" loading="lazy" decoding="async"></a><p><b>Login prompt</b> Enter a username to start</p></li>
+                <li><a class="shot" href="img/quiz/02-lesson-page.webp"><img src="img/quiz/02-lesson-page-t.webp" width="152" height="240" style="--h:240px" alt="OOP Learning and Quiz App: Lesson page, paged lessons, Previous and Next" loading="lazy" decoding="async"></a><p><b>Lesson page</b> Paged lessons, Previous and Next</p></li>
+                <li><a class="shot" href="img/quiz/03-quiz.webp"><img src="img/quiz/03-quiz-t.webp" width="264" height="240" style="--h:240px" alt="OOP Learning and Quiz App: Quiz, timed questions and a final score" loading="lazy" decoding="async"></a><p><b>Quiz</b> Timed questions and a final score</p></li>
+                <li><a class="shot" href="img/quiz/04-badge-unlocked.webp"><img src="img/quiz/04-badge-unlocked-t.webp" width="362" height="170" style="--h:170px" alt="OOP Learning and Quiz App: Badge unlocked" loading="lazy" decoding="async"></a><p><b>Badge unlocked</b></p></li>
+                <li><a class="shot" href="img/quiz/05-player-dashboard.webp"><img src="img/quiz/05-player-dashboard-t.webp" width="130" height="240" style="--h:240px" alt="OOP Learning and Quiz App: Player dashboard, level, XP and earned badges" loading="lazy" decoding="async"></a><p><b>Player dashboard</b> Level, XP and earned badges</p></li>
+              </ul>
+            </div>
+            </details>
           </div>
         </article>
         <article class="row">
           <div>
             <h3>GradTrack, FYP Submission Tracker</h3>
-            <p>A program for a faculty to track final year projects: each record holds the student, supervisor, topic, milestones and submission status, kept in a linked list with a stack of milestone updates, and searched and sorted from a menu. Team project; alongside it, an inventory program of my own for a small shop.</p>
+            <p>A tracker for final year project submissions: records in a linked list with a stack of milestone updates, searched and sorted from a menu. Team project.</p>
             <div class="stack"><span>C++</span></div>
+            <details class="more">
+            <summary><span class="c">Show screens (4)</span><span class="o">Hide screens</span></summary>
+            <div class="shots wide" role="region" aria-label="GradTrack, FYP Submission Tracker screenshots" tabindex="0">
+              <ul>
+                <li><a class="shot" href="img/gradtrack/01-main-menu.webp"><img src="img/gradtrack/01-main-menu-t.webp" width="642" height="197" style="--h:197px" alt="GradTrack, FYP Submission Tracker: Main menu" loading="lazy" decoding="async"></a><p><b>Main menu</b></p></li>
+                <li><a class="shot" href="img/gradtrack/02-project-table.webp"><img src="img/gradtrack/02-project-table-t.webp" width="592" height="240" style="--h:240px" alt="GradTrack, FYP Submission Tracker: Project table, after adding a record" loading="lazy" decoding="async"></a><p><b>Project table</b> After adding a record</p></li>
+                <li><a class="shot" href="img/gradtrack/03-search-by-student-name.webp"><img src="img/gradtrack/03-search-by-student-name-t.webp" width="274" height="240" style="--h:240px" alt="GradTrack, FYP Submission Tracker: Search by student name" loading="lazy" decoding="async"></a><p><b>Search by student name</b></p></li>
+                <li><a class="shot" href="img/gradtrack/04-submission-summary.webp"><img src="img/gradtrack/04-submission-summary-t.webp" width="624" height="240" style="--h:240px" alt="GradTrack, FYP Submission Tracker: Submission summary" loading="lazy" decoding="async"></a><p><b>Submission summary</b></p></li>
+              </ul>
+            </div>
+            </details>
           </div>
         </article>
         <article class="row">
           <div>
             <h3>Process Scheduling Simulators</h3>
-            <p>Two programs that simulate how an operating system schedules jobs: one for first-come-first-served, one for round robin that runs the same job list at several time quanta and recommends the best. Team projects, each with a written analysis of the results.</p>
+            <p>Simulators of first-come-first-served and round robin scheduling; the round robin one runs the same jobs at several time quanta and recommends the best. Team projects with a written analysis.</p>
+            <p class="proof">The round robin study tested twelve time quanta and recommended the one with the lowest average turnaround, which also cut interrupts by <strong>about 70%</strong>.</p>
             <div class="stack"><span>C++</span></div>
           </div>
         </article>
         <article class="row">
           <div>
             <h3>Two-Office Network Design</h3>
-            <p>A network for a company across two office floors sharing one internet line: wired and wireless staff, shared printers, an addressing plan and the choice of devices, built and tested in Cisco Packet Tracer by a team of five.</p>
+            <p>A wired and wireless network for two office floors sharing one internet line, with an addressing plan and shared printers, built and tested in Cisco Packet Tracer by a team of five.</p>
             <div class="stack"><span>Cisco Packet Tracer</span></div>
           </div>
         </article>
         <article class="row">
           <div>
             <h3>Formal Specifications in VDM++</h3>
-            <p>Specifications of a bank account, a cash register and a bookstore written in VDM++ with pre- and post-conditions and checked in VDMTools, each behaviour written both implicitly and explicitly.</p>
+            <p>A bank account, a cash register and a bookstore specified in VDM++ with pre- and post-conditions, each written implicitly and explicitly and checked in VDMTools.</p>
             <div class="stack"><span>VDM++</span><span>VDMTools Lite</span></div>
           </div>
         </article>
@@ -344,8 +520,8 @@
   }, { passive: true });
 
   /* skills light up the projects that used them; hover previews, click pins */
-  var list = document.querySelector('.rows.plain');
-  var rows = Array.prototype.slice.call(list.querySelectorAll('.row'));
+  var lists = Array.prototype.slice.call(document.querySelectorAll('.rows.plain'));
+  var rows = Array.prototype.slice.call(document.querySelectorAll('.rows.plain .row'));
   var buttons = Array.prototype.slice.call(document.querySelectorAll('.skills dd button'));
   var pinned = null;
   function terms(label) { return label.toLowerCase().split(' and ').map(function (t) { return t.trim(); }); }
@@ -354,7 +530,7 @@
       r.classList.remove('hit');
       r.querySelectorAll('.stack span').forEach(function (t) { t.classList.remove('on'); });
     });
-    list.classList.toggle('filtering', !!label);
+    lists.forEach(function (l) { l.classList.toggle('filtering', !!label); });
     if (!label) return;
     var want = terms(label);
     rows.forEach(function (r) {
@@ -380,6 +556,86 @@
       apply(pinned ? pinned.textContent : null);
     });
   });
+})();
+
+/* screenshot strips: Previous / Next under each strip, and a full-size viewer on click */
+(function () {
+  var strips = Array.prototype.slice.call(document.querySelectorAll('.shots'));
+  if (!strips.length) return;
+
+  strips.forEach(function (strip) {
+    var list = strip.querySelector('ul');
+    var nav = document.createElement('div');
+    nav.className = 'shots-nav';
+    nav.innerHTML = '<button type="button" data-dir="-1">Previous</button><button type="button" data-dir="1">Next</button><span></span>';
+    strip.after(nav);
+    var prev = nav.children[0], next = nav.children[1], count = nav.children[2];
+    count.textContent = list.children.length + ' screens';
+    function update() {
+      var max = list.scrollWidth - list.clientWidth;
+      nav.hidden = max < 4;
+      prev.disabled = list.scrollLeft < 4;
+      next.disabled = list.scrollLeft > max - 4;
+    }
+    nav.addEventListener('click', function (e) {
+      var b = e.target.closest('button');
+      if (b) list.scrollBy({ left: b.dataset.dir * list.clientWidth * 0.8, behavior: 'smooth' });
+    });
+    list.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    list.querySelectorAll('img').forEach(function (img) { img.addEventListener('load', update); });
+    update();
+    var more = strip.closest('details');
+    if (more) more.addEventListener('toggle', update);
+    // arrow keys scroll a focused strip
+    strip.addEventListener('keydown', function (e) {
+      if (e.target !== strip) return;
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        e.preventDefault();
+        list.scrollBy({ left: (e.key === 'ArrowRight' ? 1 : -1) * list.clientWidth * 0.8, behavior: 'smooth' });
+      }
+    });
+  });
+
+  var dlg = document.createElement('dialog');
+  if (typeof dlg.showModal !== 'function') return; // no viewer: the links open the image itself
+  dlg.className = 'viewer';
+  dlg.setAttribute('aria-label', 'Screenshot');
+  dlg.innerHTML =
+    '<div class="viewer-bar"><span></span><button type="button" data-act="close">Close</button></div>' +
+    '<figure><img alt=""></figure>' +
+    '<div class="viewer-foot"><p></p><div><button type="button" data-act="-1">Previous</button><button type="button" data-act="1">Next</button></div></div>';
+  document.body.appendChild(dlg);
+  var vImg = dlg.querySelector('img'), vCap = dlg.querySelector('.viewer-foot p'), vTitle = dlg.querySelector('.viewer-bar span');
+  var set = [], at = 0, opener = null;
+
+  function show(i) {
+    at = (i + set.length) % set.length;
+    var a = set[at], thumb = a.querySelector('img');
+    vImg.src = a.getAttribute('href');
+    vImg.alt = thumb.alt;
+    vCap.innerHTML = a.nextElementSibling.innerHTML;
+    vTitle.textContent = a.closest('.shots').getAttribute('aria-label').replace(/ screenshots$/, '') + ' · ' + (at + 1) + ' / ' + set.length;
+  }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('.shot');
+    if (!a || e.metaKey || e.ctrlKey || e.shiftKey) return;
+    e.preventDefault();
+    set = Array.prototype.slice.call(a.closest('.shots').querySelectorAll('.shot'));
+    opener = a;
+    show(set.indexOf(a));
+    dlg.showModal();
+  });
+  dlg.addEventListener('click', function (e) {
+    var b = e.target.closest('button');
+    if (b) { if (b.dataset.act === 'close') dlg.close(); else show(at + Number(b.dataset.act)); return; }
+    if (e.target === dlg || e.target.tagName === 'FIGURE') dlg.close();
+  });
+  dlg.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') show(at + 1);
+    if (e.key === 'ArrowLeft') show(at - 1);
+  });
+  dlg.addEventListener('close', function () { if (opener) opener.focus(); vImg.removeAttribute('src'); });
 })();
 </script>
 </body>
